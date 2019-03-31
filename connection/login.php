@@ -20,10 +20,8 @@ if ($type == "user"){
 
 	if($sql->execute()){
 		while($row = $sql->fetch(PDO::FETCH_OBJ)){
-			$data = array("email"=>$row->email, "password"=>$row->password, "name"=>$row->name);
+			$data = array("email"=>$row->email, "password"=>$row->password, "name"=>$row->name, "type"=>$type);
 		}
-	} else {
-		$data['erro'] = "d";
 	}
 } else if ($type == "driver"){
 	$sql = $pdo->prepare("select dd.email,
@@ -37,11 +35,11 @@ if ($type == "user"){
 
 	if($sql->execute()){
 		while($row = $sql->fetch(PDO::FETCH_OBJ)){
-			$data = array("email"=>$row->email, "password"=>$row->password, "name"=>$row->name);
+			$data = array("email"=>$row->email, "password"=>$row->password, "name"=>$row->name, "type"=>$type);
 		}
 	}
 } else {
-	$data['erro'] = "r";
+	$data['type'] = "Não especificado corretamente";
 }
 
 
