@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 
-$user = $_POST['user'];
+$email = $_POST['email'];
 $password = $_POST['password'];
 $type = $_POST['type'];
 
@@ -15,7 +15,7 @@ if ($type == 'user'){
 									from user_data
 									inner join user_data ud
 									inner join user_account ua on ud.id_user = ua.id_user
-									where ud.email = '$user' and ua.password = '$password' and ud.activated = 1"
+									where ud.email = '$email' and ua.password = '$password' and ud.activated = 1"
 	);
 
 	if($sql->execute()){
@@ -30,7 +30,7 @@ if ($type == 'user'){
 									from driver_data
 												inner join driver_data dd
 												inner join driver_account da on dd.id_driver = da.id_driver
-									where dd.email = '$user' and da.password = '$password' and dd.activated = 1;"
+									where dd.email = '$email' and da.password = '$password' and dd.activated = 1;"
 	);
 
 	if($sql->execute()){
