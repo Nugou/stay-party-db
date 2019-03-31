@@ -7,11 +7,11 @@ $type = $_POST['type'];
 
 $data = array();
 
-if ($type == 'user'){
+if ($type == "user"){
 
 	$sql = $pdo->prepare("select ud.email,
 										   ud.name,
-										   ua.password,
+										   ua.password
 									from user_data
 									inner join user_data ud
 									inner join user_account ua on ud.id_user = ua.id_user
@@ -22,8 +22,10 @@ if ($type == 'user'){
 		while($row = $sql->fetch(PDO::FETCH_OBJ)){
 			$data = array("email"=>$row->email, "password"=>$row->password, "name"=>$row->name);
 		}
+	} else {
+		$data['erro'] = "d";
 	}
-} else if ($type == 'driver'){
+} else if ($type == "driver"){
 	$sql = $pdo->prepare("select dd.email,
 										   dd.name,
 										   da.password
@@ -38,6 +40,8 @@ if ($type == 'user'){
 			$data = array("email"=>$row->email, "password"=>$row->password, "name"=>$row->name);
 		}
 	}
+} else {
+	$data['erro'] = "r";
 }
 
 
