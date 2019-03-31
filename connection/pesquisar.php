@@ -2,18 +2,15 @@
 include('connection.php');
 
 $email = $_POST['email'];
-$password = $_POST['password'];
 $type = $_POST['type'];
 
 $data = array();
 
 if ($type == "user"){
 
-	$sql = $pdo->prepare("select email,
-										   name,
-										   password
+	$sql = $pdo->prepare("select *
 									from user_data
-									where email = '$email' and password = '$password' and activated = 1"
+									where email = '$email'"
 	);
 
 	if($sql->execute()){
@@ -22,11 +19,9 @@ if ($type == "user"){
 		}
 	}
 } else if ($type == "driver"){
-	$sql = $pdo->prepare("select email,
-										   name,
-										   password
+	$sql = $pdo->prepare("select *
 									from driver_data
-									where email = '$email' and password = '$password' and activated = 1;"
+									where email = '$email'"
 	);
 
 	if($sql->execute()){
@@ -41,9 +36,9 @@ if ($type == "user"){
 
 if($data == []){
 	$data['field'] = $type . " - " . $email . " - " . $password;
-    $data["result"] = "error";
+	$data["result"] = "error";
 }else{
-    $data["result"] = "ok";
+	$data["result"] = "ok";
 }
 
 echo json_encode($data);

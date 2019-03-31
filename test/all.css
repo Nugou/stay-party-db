@@ -1,0 +1,59 @@
+
+*{
+    margin: 0 auto;
+    padding: 0;
+}
+
+body{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: darkgray;
+}
+
+form{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    margin-bottom: 7px;
+}
+
+input[type="text"], input[type="email"], input[type="password"]{
+    padding: 5px 15px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+input[type="radio"]{
+    margin-right: 10px;
+}
+
+input[type="submit"]{
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover{
+    cursor: pointer;
+    background: white;
+}
+
+.radioGroup{
+    display: inline-flex;
+    width: 300px;
+}
+
+.radioItem{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    font-size: 20px;
+}
