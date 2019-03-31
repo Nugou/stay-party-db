@@ -9,12 +9,103 @@
 	<body>
 		<form action="../connection/info.php" method="post">
 			<div class="radioGroup">
-				<div class="radioItem"><input type="radio" value="user" id="us"><label for="us">user</label></div>
-				<div class="radioItem"><input type="radio" value="driver" id="dr"><label for="dr">driver</label></div>
-				<div class="radioItem"><input type="radio" value="car" id="ca"><label for="ca">car</label></div>
+				<div class="radioItem"><input type="radio" name="type" onclick="search()" value="user" id="us"><label for="us">user</label></div>
+				<div class="radioItem"><input type="radio" name="type" onclick="search()" value="driver" id="dr"><label for="dr">driver</label></div>
+				<div class="radioItem"><input type="radio" name="type" onclick="search()" value="car" id="ca"><label for="ca">car</label></div>
 			</div>
 		</form>
 
 		<table id="tbl"></table>
+		<script>
+			function search() {
+				let tabela = document.getElementById("tbl");
+				tabela.innerHTML = "";
+				// alerta o valor do campo
+
+				let input = document.getElementsByTagName("input");
+				let type;
+				for(let i =0; i < input.length; i++){
+					if (input.item(i).checked){
+						type = input.item(i).value;
+						break;
+					}
+				}
+
+				let json_upload = "type=" + type;
+				//window.alert(document.getElementById("doc").value);
+				let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+				xmlhttp.open("POST", "../connection/info.php");
+				xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				xmlhttp.send(json_upload);
+
+				xmlhttp.onreadystatechange = function () {
+					if (this.readyState === 4 && this.status === 200) {
+						let myObj = JSON.parse(this.responseText);
+						let i, j;
+						tabela = document.getElementById("tbl");
+						tabela.innerHTML = "";
+						//tabela.createCaption().innerHTML = "<div class=\"title_table\" id=\"title\">Resultado da Pesquisa</div>";
+						let header = tabela.createTHead();
+						let row = header.insertRow(0);
+
+						let cell = [];
+						let column_name = [];
+
+						if(type === "user"){
+							column_name[0] = "id";
+							column_name[1] = "nome";
+							column_name[2] = "email";
+							column_name[3] = "senha";
+							column_name[4] = "ativo";
+						}else if (type === "driver"){
+							column_name[0] = "id";
+							column_name[1] = "nome";
+							column_name[2] = "email";
+							column_name[3] = "senha";
+							column_name[4] = "disponivel";
+							column_name[5] = "ativo";
+						} else {
+
+						}
+
+
+						for(i = 0; i < column_name.length; i++){
+							cell[i] = row.insertCell(i);
+							cell[i].innerHTML = column_name[i];
+						}
+
+						let body = tabela.createTBody();
+						let linha;
+						let cel = [];
+
+						for(i = 0; i < myObj.length; i++){
+							linha = body.insertRow();
+							for(j = 0; j < column_name.length; j++){
+								cel[j] = linha.insertCell(j);
+							}
+							if(type === "user"){
+								cel[0].innerHTML = myObj[i].id_user;
+								cel[1].innerHTML = myObj[i].name;
+								cel[2].innerHTML = myObj[i].email;
+								cel[3].innerHTML = myObj[i].password;
+								cel[4].innerHTML = myObj[i].activated;
+							}else if (type === "driver"){
+								cel[0].innerHTML = myObj[i].id_driver;
+								cel[1].innerHTML = myObj[i].name;
+								cel[2].innerHTML = myObj[i].email;
+								cel[3].innerHTML = myObj[i].password;
+								cel[4].innerHTML = myObj[i].enabled;
+								cel[5].innerHTML = myObj[i].activated;
+							}
+
+
+						}
+					} else if (this.readyState === 4) {
+						window.alert(this.readyState + " - " + this.status);
+					}
+				};
+			}
+		</script>
 	</body>
+
 </html>
