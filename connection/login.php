@@ -42,6 +42,7 @@ if ($type == 'user'){
 
 
 if($data == []){
+	$data['field'] = $type . " - " . $email . " - " . $password;
     $data["result"] = "ERRO_004";
 }else{
     $data["result"] = "OK";
