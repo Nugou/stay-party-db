@@ -52,7 +52,7 @@ if ($type == "user"){
 if($data == []){
 	$data['field'] = $type . " - " . $email . " - " . $password;
     $data["result"] = "dados não encontrado";
-}else if($data['type'] = 'error'){
+}else if($data['type'] == 'error'){
     $data["result"] = "tipo não especificado";
 } else {
 	$data["result"] = "ok";
