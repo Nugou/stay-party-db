@@ -1,10 +1,19 @@
 <?php
 include('connection.php');
 
-$email = $_POST['email'];
-$name = $_POST['name'];
-$password = $_POST['password'];
-$type = $_POST['type'];
+if(isset($_POST)){
+	$email = $_POST['email'];
+	$name = $_POST['name'];
+	$password = $_POST['password'];
+	$type = $_POST['type'];
+} else {
+	$json = file_get_contents('php://input');
+	$obj = json_decode($json,true);
+	$email = $obj['email'];
+	$name = $obj['name'];
+	$password = $obj['password'];
+	$type = $obj['type'];
+}
 
 $data = array();
 
