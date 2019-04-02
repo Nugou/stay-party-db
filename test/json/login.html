@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Test: login</title>
+
+		<link rel="stylesheet" href="../all.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="../send_json.js"></script>
+	</head>
+	<body>
+		<form id="form">
+			<input type="text" name="email" placeholder="email">
+			<input type="password" name="password" placeholder="senha">
+			<select name="type">
+				<option value="user">User</option>
+				<option value="driver">Driver</option>
+			</select>
+			<input type="button" value="enviar" onclick="send(0)">
+		</form>
+		<pre id="output"></pre>
+	</body>
+</html>

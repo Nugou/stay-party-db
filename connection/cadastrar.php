@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 
-if(isset($_POST)){
+if(count($_POST) > 0){
 	$email = $_POST['email'];
 	$name = $_POST['name'];
 	$password = $_POST['password'];
