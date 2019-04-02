@@ -46,9 +46,7 @@ if ($type == "user"){
 			$data = array("email"=>$row->email, "password"=>$row->password, "name"=>$row->name, "type"=>$type);
 		}
 	}
-} else {
-	$data['type'] = "Não especificado corretamente";
-}
+} 
 
 
 if($data == []){
