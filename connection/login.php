@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 
-if(isset($_POST['type'])){
+if(isset($_POST)){
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$type = $_POST['type'];	
@@ -20,8 +20,8 @@ $data = array();
 if ($type == "user"){
 
 	$sql = $pdo->prepare("select email,
-										   name,
-										   password
+									name,
+									password
 									from user_data
 									where email = '$email' and password = '$password' and activated = 1"
 	);
@@ -33,8 +33,8 @@ if ($type == "user"){
 	}
 } else if ($type == "driver"){
 	$sql = $pdo->prepare("select email,
-										   name,
-										   password
+									name,
+									password
 									from driver_data
 									where email = '$email' and password = '$password' and activated = 1;"
 	);
