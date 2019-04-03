@@ -24,7 +24,7 @@ if ($type == "user"){
 	if($sql->execute()){
 		$data["result"] = "ok";
 	}else{
-		$data["result"] = "error";
+		$data["result"] = "error: Ao cadastrar usuario";
 	}
 
 } else if ($type == "driver"){
@@ -33,18 +33,11 @@ if ($type == "user"){
 	if($sql->execute()){
 		$data["result"] = "ok";
 	}else{
-		$data["result"] = "error";
+		$data["result"] = "error: Ao cadastrar motorista";
 	}
 } else {
 	$data['type'] = "Não especificado corretamente";
-}
-
-
-if($data == []){
-	$data['field'] = $type . " - " . $email . " - " . $password;
-	$data["result"] = "ERRO_004";
-}else{
-	$data["result"] = "ok";
+	$data["result"] = "error: Tipo não especificado";
 }
 
 echo json_encode($data);
